@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feedback Semanal</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: #f3f4f6; font-family: 'Segoe UI', Arial, sans-serif; color: #1f2937; }
+    .wrapper { max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
+    .header { background: linear-gradient(135deg, #4F46E5, #7C3AED); padding: 36px 32px; text-align: center; }
+    .header h1 { color: #ffffff; font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+    .header p { color: #c7d2fe; font-size: 14px; }
+    .body { padding: 36px 32px; }
+    .greeting { font-size: 17px; font-weight: 600; margin-bottom: 12px; color: #111827; }
+    .message { font-size: 14px; color: #4b5563; line-height: 1.7; margin-bottom: 24px; }
+    .card-info { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 20px; margin-bottom: 28px; }
+    .card-info p { font-size: 13px; color: #6b7280; margin-bottom: 6px; }
+    .card-info p strong { color: #111827; }
+    .cta-btn { display: block; width: 100%; text-align: center; background: #4F46E5; color: #ffffff !important; font-size: 16px; font-weight: 700; padding: 16px; border-radius: 12px; text-decoration: none; letter-spacing: 0.3px; }
+    .cta-btn:hover { background: #4338ca; }
+    .anonimato { display: flex; align-items: flex-start; gap: 12px; background: #ecfdf5; border: 1px solid #d1fae5; border-radius: 12px; padding: 16px 20px; margin: 24px 0; }
+    .anonimato-icon { font-size: 22px; flex-shrink: 0; }
+    .anonimato p { font-size: 13px; color: #065f46; line-height: 1.6; }
+    .perguntas { margin: 24px 0; }
+    .perguntas h3 { font-size: 14px; font-weight: 700; color: #374151; margin-bottom: 10px; }
+    .perguntas ul { list-style: none; flex flex-col gap-2; }
+    .perguntas ul li { font-size: 13px; color: #6b7280; padding: 8px 12px; background: #f9fafb; border-radius: 8px; margin-bottom: 6px; border-left: 3px solid #6366f1; }
+    .footer { background: #f9fafb; border-top: 1px solid #e5e7eb; padding: 20px 32px; text-align: center; }
+    .footer p { font-size: 12px; color: #9ca3af; line-height: 1.7; }
+    .footer a { color: #6366f1; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+      <h1>📋 Feedback Semanal</h1>
+      <p>Semana {{ semana }} · {{ empresa_nome }}</p>
+    </div>
+
+    <!-- BODY -->
+    <div class="body">
+      <p class="greeting">Olá, equipe {{ equipe_nome }}! 👋</p>
+      <p class="message">
+        Chegou a hora do nosso feedback semanal. Leva menos de <strong>2 minutos</strong> e
+        ajuda o gestor a identificar o que podemos melhorar no ambiente de trabalho.
+        Sua opinião é muito importante!
+      </p>
+
+      <!-- INFO CARD -->
+      <div class="card-info">
+        <p><strong>Empresa:</strong> {{ empresa_nome }}</p>
+        <p><strong>Equipe:</strong> {{ equipe_nome }}</p>
+        <p><strong>Período:</strong> Semana {{ semana }} de {{ ano }}</p>
+        <p><strong>Prazo:</strong> até {{ prazo_resposta }}</p>
+      </div>
+
+      <!-- BOTÃO CTA -->
+      <a href="{{ form_url }}" class="cta-btn">
+        Responder o formulário agora →
+      </a>
+
+      <!-- GARANTIA DE ANONIMATO -->
+      <div class="anonimato">
+        <span class="anonimato-icon">🔒</span>
+        <p>
+          <strong>Suas respostas são 100% anônimas.</strong>
+          Nenhuma resposta é vinculada ao seu nome ou e-mail.
+          O gestor só visualiza dados agregados da equipe, nunca respostas individuais.
+        </p>
+      </div>
+
+      <!-- PREVIEW DAS PERGUNTAS -->
+      <div class="perguntas">
+        <h3>O que vamos perguntar:</h3>
+        <ul>
+          <li>Sua carga de trabalho esta semana foi adequada?</li>
+          <li>Seus horários combinados foram respeitados?</li>
+          <li>Você recebeu algum tratamento inadequado esta semana?</li>
+          <li>Você se sentiu reconhecido pelo seu trabalho?</li>
+          <li>Como você avalia o clima geral da equipe esta semana?</li>
+        </ul>
+      </div>
+
+      <!-- LEADERBOARD INCENTIVO -->
+      {% if equipe_posicao %}
+      <div style="background:#eef2ff; border:1px solid #c7d2fe; border-radius:12px; padding:16px 20px; margin-top:20px; text-align:center;">
+        <p style="font-size:13px; color:#4338ca;">
+          🏆 Sua equipe está em <strong>{{ equipe_posicao }}º lugar</strong> no leaderboard deste mês!
+          Continue respondendo para garantir a bonificação.
+        </p>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p>
+        Você recebeu este e-mail pois faz parte da equipe <strong>{{ equipe_nome }}</strong>
+        da empresa <strong>{{ empresa_nome }}</strong>, cadastrada na plataforma FeedSaaS.<br/>
+        <a href="{{ url_descadastro }}">Cancelar recebimento</a> ·
+        <a href="https://feedsaas.com.br/privacidade">Política de privacidade</a>
+      </p>
+      <p style="margin-top:12px; color:#d1d5db;">
+        FeedSaaS · Projeto acadêmico PUCPR · Experiência Criativa 2026
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>
