@@ -1,13 +1,8 @@
-from flask import Flask, render_template
+from flask import Blueprint, render_template
 import os
 
+landing_bp = Blueprint('landing', __name__)
 
-template_dir = os.path.abspath('app/templates')
-app = Flask(__name__, template_folder=template_dir)
-
-@app.route("/")
-def hello_world():
+@landing_bp.route('/')
+def landing():
     return render_template('landing.html')
-    
-
-app.run(debug=True)
